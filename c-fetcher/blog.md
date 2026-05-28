@@ -88,9 +88,22 @@ files.
 *Creating a MakeFile
 - Makefile saves the command (similar to the tasks.json using config build) such that it 
 removes the need to type the entire gcc command and can just do make.
-- It also tracks which files have changed and only recompiles what it needs to . 
+- It also tracks which files have changed and only recompiles what it needs to .
+
+*Writing in CSV
+- It will create new file. 
+- However if the file already exists then it overwrites the data inside it. 
 
 *Problems
 - Realised gcc was not installed, so had to install it! Website -> https://www.msys2.org/ 
 - In C file -> terminal -> build configure can help simply the build command. So basically all 
 the gcc main.c -o stocks ... stuff but simplified into one file. 
+- Only the daily verison of the time series is free in ALPHA VANTAGE T_T
+
+##### Running the code
+- The c-fetcher can be ran using:
+    gcc main.c request.c cJSON.c parse.c -lcurl -o stocks-fetcher.exe
+
+    Followed by, where it requires an argument. That argument being the stocks 
+    symbol of the company we want:
+    .\stocks-fetcher.exe argument

@@ -10,12 +10,20 @@ CFLAGS = -g -mconsole
 #library to link against, in this case, we need to link against the curl library to use its functions
 LIBS = -lcurl
 
-fetcher: stocks-analyzer.exe
+TARGET = stocks-analyzer.exe
 
-#basically checks if the executable is up to date with the source files, if not, it will recompile
-stocks-analyzer.exe: main.c request.c cJSON.c parse.c
-	$(CC) $(CFLAGS) main.c request.c cJSON.c parse.c $(LIBS) -o stocks-analyzer.exe
+SRCS = main.c request.c cJSON.c parse.c
+OBJS = $(SRCS:.c=.o)
+
+all: $(TARGET)
+
+$(TARGET): $(SRCS)
+	$(CC) $(CFLAGS) $(SRCS) $(LIBS) -o $(TARGET)
+
+run: $(TARGET)
+	./$(TARGET)
 
 #deletes the exe so we can re-build 
-clean: del stocks-analyzer.exe
+clean: del $(TARGET)
+	   del *.o
 

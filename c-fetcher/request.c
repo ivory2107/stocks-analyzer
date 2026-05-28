@@ -72,7 +72,7 @@ char *get_stock_data(const char *symbol)
 
     // snprintf -> is a buffer (buffer is a temporary storgae area in memory)
     snprintf(url, sizeof(url),
-             "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=%s&interval=5min&apikey=demo",
+             "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=%s&interval=5min&apikey=DR1XWOF151K3MXA7",
              symbol);
 
     // Tells the handle where to go. Takes in the active curl and the option type which is URL and the target web address

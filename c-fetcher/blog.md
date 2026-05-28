@@ -3,6 +3,9 @@
 ###### What is API Key?? 
 - API = Application Programming Interface, a way for different systems or applications
 to communicate with each other. 
+- A contract of sort, how to use and what you can expect to be received. 
+- API is just the concept of something being sent back when something is requested. 
+
 ###### Why do we need APIs?
 - Call request response.
 
@@ -31,6 +34,63 @@ Could be the server resource client needs to access.
         "wind" : "67"
     }
 
-#### 2. C PROGRAM 
-###### Writing request.h function
+- In normal programming, something like making all uppercase can be called using 
+a function, this is also an example of an API. 
 
+- There is also remote API's 
+
+##### WEB API
+In the web brower (client) used to connect to a server through a Universal Resource Locator(URL). 
+HTTP - hypertext protocal (protocal - how to respond, the expetectation)
+GET - HTTP verb (only receives the data) then from the server the brower is shown. 
+POST - posting data to the server.
+
+HTTP VERBS - 
+    - GET, POST, PUT, PATCH, DELETE
+
+* Can also be passed through headers. Used to further communicate what is wanted. e.g. 
+caching - stating we want a page if it has changed in a certain time (allows for caching). 
+
+* Status code - convey message from the server side 
+
+* REST - representational State Transfer, API that meet the style constraints are considered
+to be Restful. 
+
+* JSON - JavaScript Object Notation - content type is something you can request 
+
+* Example -> Spotify for developers
+
+#### 2. C PROGRAM 
+##### Writing request.c function
+###### Exploring Curl
+Curl is an open source tool that is used to send data back and forth and it runs
+locally on your computer. 
+
+So curl gets a response from the server, it doesn't arrive all at once - it comes in chucks over 
+the network. By default it prints them to stdout which is useless for parsing. 
+So in order to parse you need another function telling it to call another function 
+instead of printing in the stdout. 
+
+The buffer struct keeps track of the pointer to the data and the size. We cannot 
+pass 2 seperate variable to curl so instead we wrap it in a struct. 
+
+##### Writing parse.c function
+- This code basically takes the raw data gotten from the curl into JSON and then puts it 
+inside a file as a CSV file. 
+In order to convert to JSON we need source code for JSON parser engine. This is becuase C does
+not know what JSON is by defult. So we can download cJSON.c and cJSON.h from github repo:
+https://github.com/DaveGamble/cJSON/ 
+
+So now the cJSON.c and cJSON.h is giving your prgram the exact instructions (the logic) it 
+needs to understand and unpack JSON text. The licence needed for those are already inside the 
+files. 
+
+*Creating a MakeFile
+- Makefile saves the command (similar to the tasks.json using config build) such that it 
+removes the need to type the entire gcc command and can just do make.
+- It also tracks which files have changed and only recompiles what it needs to . 
+
+*Problems
+- Realised gcc was not installed, so had to install it! Website -> https://www.msys2.org/ 
+- In C file -> terminal -> build configure can help simply the build command. So basically all 
+the gcc main.c -o stocks ... stuff but simplified into one file. 
